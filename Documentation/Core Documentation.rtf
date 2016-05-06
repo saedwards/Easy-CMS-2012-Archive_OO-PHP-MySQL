@@ -1,0 +1,141 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green3\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww13800\viewh14020\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 \
+	\
+	API DOCUMENTATION\
+	\
+	
+\i\b Definitions
+\i0 \
+		Operations\
+		
+\b0\fs28 API\\Components\\Create\
+			\cf2 __construct(\\API\\System\\IScalarType $fieldType, $itemGuid)
+\b\fs24 \cf0 \
+		\
+		
+\b0\fs28 API\\Fields\\Create
+\fs24 \
+			
+\fs28 \cf2 __construct(\\API\\System\\IScalarType $fieldType, $itemGuid)\cf0 \
+			
+\fs24 Will create a new field and field to item reference. The value is saved in a raw data table and linked to an item.\
+			The raw value SQL type is determined by the base class inherited from any abstract definition in namespace \\API\\System\\ScalarTypes.\
+			
+\i Required
+\i0 \
+			- A field type object.\
+			- Item reference needed to attach to an item.\
+\
+		
+\fs28 API\\Items\\Create
+\fs24 \
+			
+\fs28 \cf2 __construct($label, $parent = null)\cf0 \
+			
+\fs24 Will insert a new item into the table 'items' in the database without any raw data fields or any field references in the 'item_field_catalogue' table.\
+			
+\i Required
+\i0 \
+			- A label that's used for content management.\
+			
+\i Optional
+\i0 \
+			- Parent item of which to become a descendant.\
+\
+			
+\fs28 \cf2 addField(\\API\\System\\IScalarType $field)
+\fs24 \cf0 \
+			Add a new field to the item.\
+			
+\i Required
+\i0 \
+			- A field type object derived from the API\\Fields\\Types type that must extend an abstract scalar type class derived from API\\System\\ScalarType.\
+\
+		
+\b Database Objects\
+		
+\b0\fs28 API\\Fields\\Field\
+			\cf2 __construct($id, $dataTable, $fieldTypeLabel, $value, $version)\
+			
+\fs24 \cf0 Generic object that holds all information for an item field in the database. Object is created dynamically and returned from data API operations.\
+			
+\i Required\
+			- 
+\i0 Field id in the database.\
+			- Data table reference to the table storing the raw data value.\
+			- String label describing the field type of the field.\
+			- The raw data value.\
+			- The version of this field.\
+\
+
+\fs28 \cf2 			getId()\
+			
+\fs24 \cf0 Returns the field id.\
+			\
+			
+\fs28 \cf2 getDataTable()\
+
+\fs24 \cf0 			Returns the name of the raw data table.\
+\
+
+\fs28 \cf2 			getTypeLabel()\
+
+\fs24 \cf0 			Returns a string label describing the type of field value.\
+\
+			
+\fs28 \cf2 getValue()\
+
+\fs24 \cf0 			Returns the raw data value.\
+\
+			
+\fs28 \cf2 getVersion()\
+
+\fs24 \cf0 			Returns current version of this field.\
+\
+		
+\fs28 API\\Items\\Item\
+			\cf2 __construct($guid, $parent, $version, $label = 'Not Specified', $layout = null)
+\fs24 \cf0 \
+			Generic object that holds information for an item in the database. Object is created dynamically and returned from data API operations.\
+			
+\i Required\
+			
+\i0 - guid [global unique identifier]:  A unique reference to an item in the database among numerous tables.\
+			- Parent guid reference to an item that this item inherits from.\
+			- The current version of the item.\
+			
+\i Optional\
+			
+\i0 - A label describing the item.\
+			- The layout reference of the item.\
+\
+			
+\fs28 \cf2 guid()\
+			
+\fs24 \cf0 Returns the guid of the item.\
+\
+			
+\fs28 \cf2 parent()\
+			
+\fs24 \cf0 Returns the parent guid of the item.\
+\
+			
+\fs28 \cf2 version()\
+			
+\fs24 \cf0 Returns an integer of current version of the item.\
+\
+			
+\fs28 \cf2 label()\
+			
+\fs24 \cf0 Returns the label of the item.\
+\
+			
+\fs28 \cf2 layout()\
+			
+\fs24 \cf0 Returns the integer id the layout of the item.\
+}

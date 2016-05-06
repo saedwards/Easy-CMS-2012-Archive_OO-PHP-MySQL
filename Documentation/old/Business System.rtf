@@ -1,0 +1,108 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf350
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11820\viewh11620\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 \
+	\
+
+\b\fs28 	Business System\
+	
+\b0\fs24 Business configuration of application. \
+	Update all business related logic in this part of the application.\
+	- Ability to add more item types.\
+	- Ability to create new item types table.\
+	- Ability to add new field types and restrictions.\
+\
+	- Ability to add more purchase_options.\
+	- Ability to add more purchase_options_allocations.\
+	\
+	
+\b TABLES
+\b0 \
+	item_types [BUSINESS RULES]\
+	- type [TEXT UNIQUE IDENTIFIER]\
+		
+\fs18 IDENTIFIER SAMPLES\
+		
+\fs24 - PROFILE\
+		- BUSINESS_PROFILE\
+		- OFFER\
+		- EVENT\
+		- \{OTHER PERSONAL ITEM TYPE\}\
+		- \{OTHER BUSINESS ITEM TYPE\}\
+	- usage [TEXT]\
+		
+\fs18 CONSTANTS
+\fs24 \
+		- COMMERCIAL\
+		- NON_COMMERCIAL\
+	- amount [INT - Amount of this item that is allowed to be used]\
+	- times_usable [INT - How many times the same item can be used within the same purchase?]\
+	- \{table references\}\
+	\
+	field types [BUSINESS RULES]\
+	- label [TEXT UNIQUE IDENTIFIER]\
+		
+\fs18 IDENTIFIERS SAMPLES
+\fs24 \
+		- TITLE_256\
+		- DESCRIPTION_500\
+		- DATE_CREATED\
+	- type [TEXT]\
+		- TEXT_FIELD\
+		- TEXT_AREA\
+		- DATE\
+	- min_length [INT]\
+		- 0\
+		- 0\
+		- 8\
+	- max_length [INT]\
+		- 256\
+		- 500\
+		- 8\
+\
+	purchase_options [Like packages but more generic]\
+	- id [PRIMARY]\
+	- title [TEXT]\
+	- price [INT]\
+	- notes [TEXT - For internal use only]\
+	- status [TEXT]\
+		
+\fs18 CONSTANTS\
+		
+\fs24 - Active\
+		- Inactive\
+	\
+	purchase_option_allocations [Many to one - \
+	Businesses can add more item types  to each purchase option]\
+	- purchase_options_id [FOREIGN KEY INT]\
+	- item_type [INT FOREIGN KEY]\
+	- duration [INT]\
+	- duration_type [TEXT]\
+		
+\fs18 CONSTANTS
+\fs24 \
+		- Hour\
+		- Day\
+		- Month\
+		- Year\
+		- Null\
+	- amount [INT - Number of this item type]\
+\
+	(For running CRON jobs)\
+	jobs [MASTER TABLE]\
+	- id [PRIMARY KEY]\
+	- label [TEXT]\
+	- function [TEXT]\
+\
+	job_conditions\
+	- job_id [FOREIGN KEY]\
+	- condition [TEXT]\
+\
+	job_table_locations\
+	- job_id [FOREIGN KEY]\
+	- table [TEXT]\
+\
+}

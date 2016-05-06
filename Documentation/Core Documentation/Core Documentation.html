@@ -1,0 +1,866 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Core Documentation</title>
+
+<style type="text/css">
+	* {
+		margin : 0;
+		padding : 0;
+		font-family : arial; }
+		
+	ul {
+		margin-top : 10px;
+		padding-left : 20px;
+		list-style-type : disc; }
+		
+		ul li a {
+			display : block;
+			padding : 4px 6px;
+			font-size : 15px;
+			background-color : #eee;
+			border-top : 1px solid #fff;
+			border-bottom : 1px solid #ccc; }
+		
+	ul.files,
+	ul.classes,
+	ul.interfaces {
+		padding : 0;
+		margin-top : 0;
+		list-style-type : none;
+		border-bottom : 1px solid #ccc; }
+		
+	ul.files li a,
+	ul.classes li a,
+	ul.interfaces li a {
+		padding : 5px 0;
+		background : none;
+		color : #b90000;
+		border : none;
+		border-top : 1px solid #ccc; }
+	
+	ul.files li a {
+		color : #999; }
+	
+	ul.files li .section,
+	ul.classes li .section,
+	ul.interfaces li .section {
+		margin : 0;
+		padding : 0;
+		border : none; }
+	
+	ul.files li .section p,
+	ul.classes li .section p,
+	ul.interfaces li .section p {
+		line-height : 25px; }
+		
+	ul.methods {
+		margin : 10px;
+		margin-top : 0;
+		margin-bottom : 10px;
+		padding : 0;
+		list-style-type : none; }
+		
+	ul.methods li p {
+		font-size : 13px; }
+	
+	h1 {
+		font-weight : normal;
+		font-size : 25px; }
+		
+	h2 {
+		font-weight : normal;
+		font-size : 20px; }
+		
+	h3 {
+		font-weight : normal;
+		font-size : 18px;
+		color : #b90000; }
+		
+	h4 {
+		font-weight : normal;
+		line-height : 20px;
+		font-size : 14px; }
+		
+	h5 {
+		font-weight : normal;
+		line-height : 20px;
+		font-size : 13px; }
+		
+	p {
+		line-height : 20px;
+		font-size : 13px; }
+		
+		p.description {
+			margin-bottom : 5px;
+			padding : 0 5px;
+			background-color : #f5f5f5; }
+		
+	em {
+		font-style : normal;
+		color : blue; }
+		
+	.container {
+		margin : 20px; }
+		
+	.section {
+		margin-bottom : 10px;
+		padding : 10px;
+		border : 1px solid #ccc;
+		border-top : none; }
+</style>
+<script type="text/javascript" language="javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript" language="javascript">
+	/*$(document).ready(function (){
+		$('.accordion li .section').css('display', 'none');
+		$('.accordion li a:first-child').click(function(){
+			$(this).next('.section').slideToggle('fast');
+			return false;
+		});
+	});*/
+	
+	$(document).ready(function (){
+		$('.accordion li .section').css('display', 'none');
+		$('.accordion li a:first-child').click(function(){
+			$(this).parent().parent().children('li').not($(this).parent()).children('.section').slideUp('fast');
+			$(this).next('.section').slideToggle('fast');
+			return false;
+		});
+	})
+</script>
+</head>
+
+<body>
+	<div class="container">
+        <h1>Core Documentation</h1>
+        <h2>Directory:</h2>
+        <ul class="accordion">
+            <li>
+            	<a href="#">API\</a>
+                <div class="section">
+                	<h3>Application Programming Interface</h3>
+                    <p>Gives the interface for websites to communicate to all correct components. All interfaces help here.</p>
+                    <ul>
+                    	<li>
+                        	<a href="#">API\Data\</a>
+                            <div class="section">
+                            	<ul>
+                                	<li>
+                                    	<a href="#">API\Data\Components</a>
+                                        <div class="section">
+                                            <ul class="interfaces">
+                                                <li>
+                                                    <a href="#">IComponentType</a>
+                                                    <div class="section">
+                                                    	<ul class="methods">
+                                                        	<li>
+                                                            	<em>create()</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>validate()</em>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                        	</ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<a href="#">API\Data\Items</a>
+                                        <div class="section">
+                                            <ul class="interfaces">
+                                                <li>
+                                                    <a href="#">IGetDescendantsCallBack</a>
+                                                    <div class="section">
+                                                    	<ul class="methods">
+                                                        	<li>
+                                                            	<em>__construct($targetObject)</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>getItemClosure()</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>upLevelClosure()</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>downLevelClosure()</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>nextItemClosure()</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>object()</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>setGetItemClosure($method)</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>setUpLevelClosure($method)</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>setDownLevelClosure($method)</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>setNextItemClosure($method)</em>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                        	</ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">API\System\</a>
+                            <div class="section">
+                            	<ul class="interfaces">
+                                	<li>
+                                    	<a href="#">IError</a>
+                                        <div class="section">
+                                            <ul class="methods">
+                                                <li>
+                                                    <em>getDisplayError()</em>
+                                                </li>
+                                                <li>
+                                                    <em>getSystemError()</em>
+                                                </li>
+                                                <li>
+                                                    <em>getMethod()</em>
+                                                </li>
+                                                <li>
+                                                    <em>getFile()</em>
+                                                </li>
+                                                <li>
+                                                    <em>getLine()</em>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+            	<a href="#">Data\</a>
+                <div class="section">
+                    <h3>Data</h3>
+                    <p>The Data namespace holds all classes and methods that are concerned with reading and writing to the database. Offering a formal way to address structured content from the database using system objects such as items and components.</p>
+                    <ul>
+                    	<li>
+                        	<a href="#">Data\Components\</a>
+                            <div class="section">
+            			        <h3>Components</h3>
+			                    <p>Components are used to create data templates, complex fields and items in the UI. Any type of content creation starts with the use of a component. Components can be added by developers to the \Components\Types\ namespace. and registered with the system.</p>
+                                <ul class="classes">
+                                    <li>
+                                        <a href="#">Create</a>
+                                        <div class="section">
+                                            <p class="description">Used to create a component. Creates an entry in the data_templates table and references this in the components table.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>__construct($label, $parent = null)</em>
+                                                    <p class="description">
+                                                        <strong>Required</strong>
+                                                        <br />A label for the component that's displayed in the editor.
+                                                        <br /><strong>Optional</strong>
+                                                        <br />Set a parent for this component to include this as a descendant in a tree.
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="#">Get</a>
+                                        <div class="section">
+                                            <p class="description">Gets the component template information from the data_template table.</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="#">GetTemplate</a>
+                                        <div class="section">
+                                            <p class="description">Gets the data_template only of the component.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>byGUID($guid)</em>
+                                                    <p class="description">
+                                                    	<strong>Required</strong>
+                                                        <br />Global unique identifier needed to reference the right data template.
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <a href="#">Data\Components\Types\</a>
+                                        <div class="section">
+                                            <h3>Types</h3>
+                                            <p>Component types used to create new component items.</p>
+                                            <ul class="classes">
+                                                <li>
+                                                    <a href="#">(IComponentType)</a>
+                                                    <div class="section">
+                                                    	<p class="description">A Component type implementing IComponentType</p>
+                                                        <ul class="methods">
+                                                            <li>
+                                                                <em>create()</em>
+                                                            </li>
+                                                            <li>
+                                                            	<em>validate()</em>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Data\Composition\</a>
+                            <div class="section">
+            			        <h3>Composition</h3>
+			                    <p>Composed items used to manage and create relationships with items with content.</p>
+                                <ul class="classes">
+                                	<li>
+                                    	<a href="#">Insert</a>
+                                        <div class="section">
+                                        	<p class="description">Creates a child-parent relationship chosen by the user.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>target(\System\IGUID $obj)</em>
+                                                    <p class="description">
+                                                    	Specify the target GUID object by passing to this target method
+                                                        <br /><strong>Required</strong>
+                                                        <br />A valid item with a system GUID reference must be a descendnt of IGUID interface.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                	<em>add(\System\IGUID $obj, $templateVariable)</em>
+                                                    <p class="description">
+                                                    	Add items to the target item (has a relationship).
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                	<em>getLayoutTemplateVariables()</em>
+                                                    <p class="description">Returns the variables listed in the layout template.</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Data\DataTemplates\</a>
+                            <div class="section">
+            			        <h3>Data Templates</h3>
+			                    <p>Data templates used to create items, which can be made for website visitors or content editors.</p>
+                                <ul class="classes">
+                                	<li>
+                                    	<a href="#">Create</a>
+                                        <div class="section">
+                                        	<p class="description">Creates a data template used to create items.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>__construct($label, $parent = null)</em>
+                                                    <p class="description">
+                                                    	<strong>Required</strong>
+                                                        <br />A label that describes the data template.
+                                                        <br /><strong>Optional</strong>
+                                                        <br />Parent to add the data template to a descendant tree.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                	<em>addFieldTypeReference($label, $fieldTypeId)</em>
+                                                    <p class="description">
+                                                    	<strong>Required</strong>
+                                                        <br />A description label.
+                                                        <br />Integer ID of the field type.
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<a href="#">Get</a>
+                                        <div class="section">
+                                        	<p class="description">Retreives a data template.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>byGUID($guid)</em>
+                                                    <p class="description">
+                                                    	<strong>Required</strong>
+                                                        <br />The GUID of the desired data template.
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Data\Fields\</a>
+                            <div class="section">
+            			        <h3>Fields</h3>
+			                    <p>Data fields hold raw data linked to items in the database. The raw values are stored as their true type in the database.</p>
+                                <ul class="classes">
+                                	<li>
+                                    	<a href="#">Create</a>
+                                        <div class="section">
+                                        	<p class="description">Will create a new field and field to item reference. The value is saved in a raw data table and linked to an item. The raw value SQL type is determined by the base class inherited from any abstract definition in namespace.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>__construct(\System\IScalarType $fieldType, $itemGuid)</em>
+                                                    <p class="description">
+                                                    	<strong>Required</strong>
+                                                        <br />A valid system field type that implements IScalarType.
+                                                        <br />An object with a system GUID.
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<a href="#">CreateNewVersion</a>
+                                        <div class="section">
+                                        	<p class="description">No yet implemented.</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<a href="#">GetItemFields</a>
+                                        <div class="section">
+                                        	<p class="description">Get all the fields of a GUID object.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>__construct($itemGuid)</em>
+                                                    <p class="description">
+                                                    	<strong>Required</strong>
+                                                        <br />A valid registered system guid.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                	<em>getFields()</em>
+                                                    <p class="description">Returns all the fields.</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                	<li>
+                                        <a href="#">Data\Fields\Types</a>
+                                        <div class="section">
+                                            <h3>Types</h3>
+                                            <p>All system field types created from basic Scalar Types.</p>
+                                            <ul class="classes">
+                                                <li>
+	                                            	<a href="#">(IScalarType)</a>
+                                                    <div class="section">
+                                                    	<p class="description">Objects that extend IScalarType only.</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Data\Items\</a>
+                            <div class="section">
+            			        <h3>Items</h3>
+			                    <p>Items are content holders representing basic elements of a page. Fields are written into the presentation elements of an item.</p>
+                                <ul class="classes">
+                                	<li>
+                                    	<a href="#">Create</a>
+                                        <div class="section">
+                                        	<p class="description">Will insert a new item into the table 'items' in the database without any raw data fields or any field references in the 'item_field_catalogue' table.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>__construct($label, $parent = null)</em>
+                                                	<p class="description">
+                                                        <strong>Required</strong>
+                                                        <br />A label that's used for content management.
+                                                        <br /><strong>Optional</strong>
+                                                        <br />Parent item of which to become a descendant.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                	<em>addField(\System\IScalarType $field)</em>
+                                                    <p class="description">
+                                                    	<strong>Required</strong>
+                                                        <br />A field type implementing IScalarType.
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<a href="#">Edit</a>
+                                        <div class="section">
+	                                        <p class="description">Not yet implemented.</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<a href="#">Get</a>
+                                        <div class="section">
+                                        	<p class="description">Retreive an item object from the database.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>byGUID($guid)</em>
+                                                	<p class="description">
+                                                        <strong>Required</strong>
+                                                        <br />A valid system GUID string reference.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                	<em>byPath()</em>
+                                                	<p class="description">Not yet implemented.</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<a href="#">GetDescendants</a>
+                                        <div class="section">
+                                        	<p class="description">Retreives a tree of item objects from the database.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>__construct($guid, $levels = false, \Data\Items\IGetDescendantsCallback $callback = null)</em>
+                                                	<p class="description">
+                                                        <strong>Required</strong>
+                                                        <br />A valid system GUID string reference.
+                                                        <br /><strong>Optional</strong>
+                                                        <br />The depth of descendants to collect.
+                                                        <br />A callback implementing \Data\Items\IGetDescendantsCallback.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                	<em>get()</em>
+                                                    <p class="description">Check implementation.</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<a href="#">GetRoot</a>
+                                        <div class="section">
+                                        	<p class="description">Retreives root items that don't have parents from the database.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>all()</em>
+                                                	<p class="description">Gets all the items in the database that don't have a parent.</p>
+                                                </li>
+                                                <li>
+                                                	<em>allWithTemplate()</em>
+                                                    <p class="description">Gets all items with a template. (Needs rework with various presentations per item).</p>
+                                                </li>
+                                                <li>
+                                                	<em>allWithoutTemplate()</em>
+                                                    <p class="description">Gets all items without a template. (Needs rework).</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Data\Layouts\</a>
+                            <div class="section">
+            			        <h3>Layouts</h3>
+			                    <p>The layout(s) of an item. Custom markup used with placeholder variable strings that are replaced with field values.</p>
+                                <ul class="classes">
+                                	<li>
+                                    	<a href="#">Create</a>
+                                        <div class="section">
+                                        	<p class="description">Creates a layout reference for a system GUID object.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>__construct($label, $dir)</em>
+                                                    <p class="description">
+                                                    	<strong>Required</strong>
+                                                        <br />A label that describes the layout for the content editors.
+                                                        <br />The directory of the physical template.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                	<em>getLayout()</em>
+                                                    <p class="description">Returns a layout object representing the database entry just created.</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                    	<a href="#">Get</a>
+                                        <div class="section">
+                                        	<p class="description">Retreives layout details and returns a system layout object.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>byId($id)</em>
+                                                    <p class="description">
+                                                    	<strong>Required</strong>
+                                                        <br />The ID of the desired layout
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                	<em>all()</em>
+                                                    <p class="description">Returns all layout objects.</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="#">Events\ - Yet to implement</a>
+                <div class="section">
+                    <h3>Events</h3>
+                    <p>(Internal?) Actions that happen that happen from certain events or triggers in the system.</p>
+                    <ul>
+                        <li>
+                            <a href="#">Events\System\</a>
+                            <div class="section">
+                                <h3>System</h3>
+                                <p>Paragraph about the System events namespace</p>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#">Events\Custom\</a>
+                            <div class="section">
+                                <h3>Custom</h3>
+                                <p>Paragraph about the Custom events namespace</p>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#">Events\Listeners\</a>
+                            <div class="section">
+                                <h3>Listeners</h3>
+                                <p>Add listeners to any part of the hierarchy to initiate events.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="#">Requests\ - Yet to implement</a>
+                <div class="section">
+                    <h3>Request</h3>
+                    <p>Invoke events based on request. Allow requests to initialise custom events.<br />
+                    Set up listeners for requests that map to events.<br />
+                    - Handle URL requests.<br />
+					- Handle raw data.<br />
+					- Handle post data.<br />
+					- Handle cookies.<br />
+					- <strong>Handle sent XML data.</strong></p>
+                </div>
+            </li>
+            <li>
+                <a href="#">FunctionTests\</a>
+                <div class="section">
+                    <h3>Function Tests</h3>
+                    <p>Tests to comment through class methods.</p>
+                </div>
+            </li>
+            <li>
+                <a href="#">Library\</a>
+                <div class="section">
+                    <h3>Library</h3>
+                    <p>A library of common functionality that's generic to any system.</p>
+                    <ul class="classes">
+                    	<li>
+                        	<a href="#">EventDispatcher</a>
+                            <div class="section">
+                            	<p class="description">Not yet implemented.</p>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">MySQL</a>
+                            <div class="section">
+                            	<p class="description">A standard way to connect to the MySQL database.</p>
+                                <ul class="methods">
+                                	<li>
+                                    	<em>__construct($options=array())</em>
+                                        <p class="description">
+                                        	<strong>Optional</strong>
+                                            <br />All the connection strings as an array needed.
+                                        </p>
+                                    </li>
+                                    <li>
+                                    	<em>query($query)</em>
+                                        <p class="description">
+                                        	<strong>Required</strong>
+                                            <br />A valid mysql query as a string.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Result</a>
+                            <div class="section">
+                            	<p class="description">Returns MySQL query result information.</p>
+                                <ul class="methods">
+                                	<li>
+                                    	<em>__construct($mysql, $result, $conId)</em>
+                                        <p class="description">
+                                        	<strong>Required</strong>
+                                            <br />The MySQL object.
+                                            <br />The MySQL returned result.
+                                            <br />The connection ID.
+                                        </p>
+                                    </li>
+                                    <li>
+                                    	<em>fetchRow()</em>
+                                        <p class="description">Returns the results set from the database.</p>
+                                    </li>
+                                    <li>
+                                    	<em>countRows()</em>
+                                        <p class="description">Returns the amount of rows in the result.</p>
+                                    </li>
+                                    <li>
+                                    	<em>countAffectedRows()</em>
+                                        <p class="description">Returns the amount of rows affected by the query.</p>
+                                    </li>
+                                    <li>
+                                    	<em>getInsertID()</em>
+                                        <p class="description">Returns the ID of the inserted row.</p>
+                                    </li>
+                                    <li>
+                                    	<em>seekRow($row = 0)</em>
+                                        <p class="description">Seek to specified row offset.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="#">Operations\</a>
+                <div class="section">
+                    <h3>Operations</h3>
+                    <p>Paragraph about operations</p>
+                    <ul>
+                        <li>
+                            <a href="#">Operations\PageFunctions\</a>
+                            <div class="section">
+                                <h3>Page Functions</h3>
+                                <p>rehbef</p>
+                                <ul class="classes">
+                                    <li>
+                                        <a href="#">CreateDataTemplate</a>
+                                        <div class="section">
+                                            <p class="description">Yet to implement</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="#">ViewSingleItem - Yet to implement correctly</a>
+                                        <div class="section">
+                                            <p class="description">Class to display an item and its descendants in its entirety. Just pass this page a GUID and it'll do the leg work to display the correct page presentation</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+            	<a href="#">Presentation\</a>
+                <div class="section">
+                    <h3>Presentation</h3>
+                    <p>Everything to do with presentational layouts delivered to the client.</p>
+                    <ul>
+                    	<li>
+                        	<a href="#">Presentation\Templates\</a>
+                           	<div class="section">
+                                <h3>Templates</h3>
+                                <p>Static files for master page layouts</p>
+                                <ul class="files">
+                                	<li>
+                                    	<a href="#">Standard_XHTML_1.0.html</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Presentation\Types\</a>
+                           	<div class="section">
+                                <h3>Types</h3>
+                                <p>Base classes of which to create pages manually.</p>
+                                <ul class="classes">
+                                	<li>
+                                    	<a href="#">StandardXHTML.php</a>
+                                        <div class="section">
+                                        	<p class="description">Gives basic areas for content types to be added.</p>
+                                            <ul class="methods">
+                                            	<li>
+                                                	<em>__destruct()</em>
+                                                    <p class="description">Writes the content of items to the page.</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="#">System\</a>
+                <div class="section">
+                    <h3>System</h3>
+                    <p>Paragraph about the System namespace</p>
+                    <ul class="classes">
+                    	<li>
+                        	<a href="#">CustomConsole</a>
+                        </li>
+                        <li>
+                        	<a href="#">Error</a>
+                        </li>
+                        <li>
+                        	<a href="#">Error Handler</a>
+                        </li>
+                        <li>
+                        	<a href="#">GUID</a>
+                        </li>
+                        <li>
+                        	<a href="#">Error</a>
+                        </li>
+                        <li>
+                        	<a href="#">RandomData</a>
+                        </li>
+                        <li>
+                        	<a href="#">Resources</a>
+                        </li>
+                    </ul>
+                    <ul>
+                    	<li>
+                            <a href="#">System\ScalarTypes\</a>
+                            <div class="section">
+                                <h3>ScalarTypes</h3>
+                                <p>Paragraph about ScalarTypes</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

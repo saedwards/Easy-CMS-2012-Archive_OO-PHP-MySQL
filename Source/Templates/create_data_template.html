@@ -1,0 +1,65 @@
+<h1>Create Data Template</h1>
+${CONTENT}
+<form method="post" action="?somewhere">
+<div class="edit">
+	<ul>
+    	<li><span>Template label: ${INPUT_TEMPLATE_LABEL} <input type="text" /></span></li>
+        <li>
+        	<h2>Add template layout:</h2>
+        	<ul class="add">
+                <li>
+                    <span>
+                        Layout: ${SELECT_TEMPLATE_LAYOUT}
+                        <select name="add_template_layout">
+                            <option>Layout 1</option>
+                            <option>Layout 2</option>
+                        </select>
+                    </span>
+                    <a href="#">Select</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+        	<h2>Allowed item layout:</h2>
+        	<ul class="add">
+                <li>
+                    <span>
+                        Layout: ${SELECT_PERMITTED_ITEM_LAYOUT}
+                        <select name="add_layout">
+                            <option>Layout 1</option>
+                            <option>Layout 2</option>
+                        </select>
+                    </span>
+                    <a href="#">Add</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+        	<h2>Add field type</h2>
+            <div id="field_types_added">
+            </div>
+        	<ul class="add">
+            	<li>
+                	<span>
+                        Placeholder Variable: ${SELECT_JOIN_PLACEHOLDER_VARIABLE}
+                        <select name="content_placeholders">
+                            <option>SHOW PLACEHOLDER VARIABLES OF SELECTED LAYOUT TEMPLATE</option>
+                        </select>
+                    </span>
+                    <span>
+                    	Field Type: ${SELECT_JOIN_FIELD_TYPE}
+                        <select name="field_types">
+                            <option>String</option>
+                            <option>Integer</option>
+                            <option>Select Box</option>
+                        </select>
+                    </span>
+                    <a href="#">Add</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <input type="submit" value="Create" class="submit" />
+    <div class="clear"></div>
+</div>
+</form>

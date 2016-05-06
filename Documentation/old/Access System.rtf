@@ -1,0 +1,72 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf350
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red255\green0\blue6;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww13280\viewh14020\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 \
+\
+	
+\b\fs28 Access System 
+\b0 [Separate database]
+\b  - Account System Dependant
+\fs24 \
+
+\b0 	Handle the login / logout requests and session management. Kept externally to the rest of the application.\
+	- Register table will store all current logged in users - hashed to mask session_id.\
+	- No session data needed.\
+\
+	
+\b Workflows\
+	
+\b0 - Login\
+		- Business\
+			- Add user types\
+			- Automate user type creation. Append to any server action\
+			- Change user access.\
+		- Admin\
+			- Setup business user privileges\
+			- Change business user privileges\
+	- Logout\
+	\
+	
+\fs18 KEY
+\fs24 \
+	\cf2 External information not in this system.\cf0 \
+\
+	
+\b TABLES
+\b0 \
+	registered_sessions\
+	- session_hash [512 BIT ENCRYPTED - UNIQUE IDENTIFIER]\
+	- created [TIME STAMP - row will not update]\
+\
+	passwords\
+	\cf2 - user_id [UNIQUE IDENTIFIER FOREIGN KEY] 
+\b - Account
+\b0 \cf0 \
+	- hash [512 BIT ENCRYPTED]\
+	- updated [TIME STAMP - updates when row updates]\
+	- created [TIME STAMP]\
+\
+	user_privileges\
+	- user_id\
+	- user_type\
+\
+	user_types\
+	- type [TEXT UNIQUE IDENTIFIER]\
+	- access_label [TEXT]\
+	\
+	user_table_access\
+	- user_type [FOREIGN KEY]\
+	- table\
+	- contraint\
+		
+\fs18 CONSTANTS\
+		
+\fs24 - READ_ONLY\
+		- READ_WRITE\
+		- WRITE_ONLY\
+		- NONE\
+\
+}

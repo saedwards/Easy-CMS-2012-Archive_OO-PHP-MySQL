@@ -1,0 +1,317 @@
+
+# CREATE INSERT_COMPOSITION_CATALOGUE TABLE
+
+CREATE TABLE insert_composition_catalogue (
+  `guid` VARCHAR(255) NOT NULL,
+  `has_guid` VARCHAR(255) NOT NULL,
+  `layout_template_variable_variable` VARCHAR(255) DEFAULT NULL,
+  UNIQUE idx_guid_has_guid(guid, has_guid, layout_template_variable_variable)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE LAYOUT_TYPES TABLE
+
+CREATE TABLE layout_types (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `label` TEXT,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE LAYOUT_TEMPLATE_VARIABLES TABLE
+
+CREATE TABLE layout_template_variables (
+  `variable` VARCHAR(255) NOT NULL,
+  `layout_template_id` INT NOT NULL,
+  UNIQUE idx_catalogue_date_version (variable, layout_template_id)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE LAYOUT_TEMPLATES TABLE
+
+CREATE TABLE layout_templates (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `label` TEXT,
+  `directory` TEXT,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE LAYOUT_TEMPLATE_INSERT_OPTIONS TABLE
+
+CREATE TABLE layout_template_insert_options_catalogue (
+  `layout_template_id` INT NOT NULL,
+  `data_template_guid` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`layout_template_id`)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE DATA_TEMPLATES TABLE
+
+CREATE TABLE data_templates (
+  `guid` VARCHAR(255) NOT NULL,
+  `label` TEXT,
+  `parent` VARCHAR(255),
+  `layout_template_id` INT DEFAULT NULL,
+  `product_layout_template_id` INT DEFAULT NULL,
+  `current_version` INT NOT NULL,
+  PRIMARY KEY (`guid`)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE COMPONENT_TYPES TABLE
+
+CREATE TABLE component_types (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `label` TEXT NOT NULL,
+  `definition` TEXT NOT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE COMPONENT_DATA_TEMPLATES_CATALOGUE TABLE
+
+CREATE TABLE components_data_templates_catalogue (
+  `data_template_guid` VARCHAR(255) NOT NULL,
+  `component_type_id` INT DEFAULT NULL
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE ITEMS TABLE
+
+CREATE TABLE items (
+  `guid` VARCHAR(255) NOT NULL,
+  `label` TEXT NOT NULL,
+  `parent` VARCHAR(255) DEFAULT NULL,
+  `data_template_guid` VARCHAR(255),
+  `layout_template_id` INT DEFAULT NULL,
+  `current_version` INT NOT NULL,
+  PRIMARY KEY (`guid`)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE FIELD_TYPES TABLE
+
+CREATE TABLE field_types (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `label` TEXT NOT NULL,
+  `validation_definition` TEXT NOT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE DATA_TEMPLATE_FIELD_TYPE_CATALOGUE TABLE
+
+CREATE TABLE data_template_field_type_catalogue (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `label` TEXT,
+  `field_type_id` INT NOT NULL,
+  `data_template_guid` VARCHAR(255) NOT NULL,
+  `version` INT NOT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE ITEM_FIELD_CATALOGUE TABLE
+
+CREATE TABLE item_field_catalogue (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `field_type_id` INT NOT NULL,
+  `item_guid` VARCHAR(255) NOT NULL,
+  `data_template_field_type_catalogue_id` INT DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE INTEGERS TABLE
+
+CREATE TABLE integers (
+  `item_field_catalogue_id` INT NOT NULL,
+  `value` INT,
+  `version` INT NOT NULL,
+  UNIQUE idx_catalogue_number_version (item_field_catalogue_id, version)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE DATES TABLE
+
+CREATE TABLE dates (
+  `item_field_catalogue_id` INT NOT NULL,
+  `value` DATE,
+  `version` INT NOT NULL,
+  UNIQUE idx_catalogue_date_version (item_field_catalogue_id, version)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE STRINGS TABLE
+
+CREATE TABLE strings (
+  `item_field_catalogue_id` INT NOT NULL,
+  `value` TEXT,
+  `version` INT NOT NULL,
+  UNIQUE idx_catalogue_string_version (item_field_catalogue_id, version)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# CREATE BOOLEANS TABLE
+
+CREATE TABLE booleans (
+  `item_field_catalogue_id` INT NOT NULL,
+  `value` BOOLEAN,
+  `version` INT NOT NULL,
+  UNIQUE idx_catalogue_boolean_version (item_field_catalogue_id, version)
+)
+ENGINE = InnoDB
+CHARACTER SET utf8;
+
+
+
+# ADD FOREIGN KEYS
+
+ALTER TABLE items ADD CONSTRAINT `items_layout_template_fk` FOREIGN KEY `items_layout_template_fk` (`layout_template_id`)
+    REFERENCES `layout_templates` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE;
+
+ALTER TABLE items ADD CONSTRAINT `items_data_template_fk` FOREIGN KEY `items_data_template_fk` (`data_template_guid`)
+    REFERENCES `data_templates` (`guid`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE;
+
+ALTER TABLE layout_template_insert_options_catalogue ADD CONSTRAINT `data_template_insert_options_catalogue_fk` FOREIGN KEY `data_template_insert_options_catalogue_fk` (`data_template_guid`)
+    REFERENCES `data_templates` (`guid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE layout_template_insert_options_catalogue ADD CONSTRAINT `layout_template_id_insert_options_catalogue_fk` FOREIGN KEY `layout_template_id_insert_options_catalogue_fk` (`layout_template_id`)
+    REFERENCES `layout_templates` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE data_template_field_type_catalogue ADD CONSTRAINT `data_template_data_template_field_type_catalogue_fk` FOREIGN KEY `data_template_data_template_field_type_catalogue_fk` (`data_template_guid`)
+    REFERENCES `data_templates` (`guid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE item_field_catalogue ADD CONSTRAINT `item_field_catalogue_field_types_fk` FOREIGN KEY `item_field_catalogue_field_types_fk` (`field_type_id`)
+    REFERENCES `field_types` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE item_field_catalogue ADD CONSTRAINT `item_field_catalogue_item_guid_fk` FOREIGN KEY `item_field_catalogue_item_guid_fk` (`item_guid`)
+    REFERENCES `items` (`guid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+ 
+ALTER TABLE item_field_catalogue ADD CONSTRAINT `item_field_catalogue_data_template_field_type_catalogue_fk` FOREIGN KEY `item_field_catalogue_data_template_field_type_catalogue_fk` (`data_template_field_type_catalogue_id`)
+    REFERENCES `data_template_field_type_catalogue` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE;
+
+ALTER TABLE integers ADD CONSTRAINT `items_integers_fk` FOREIGN KEY `items_integers_fk` (`item_field_catalogue_id`)
+    REFERENCES `item_field_catalogue` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE dates ADD CONSTRAINT `items_dates_fk` FOREIGN KEY `items_dates_fk` (`item_field_catalogue_id`)
+    REFERENCES `item_field_catalogue` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE strings ADD CONSTRAINT `items_strings_fk` FOREIGN KEY `items_strings_fk` (`item_field_catalogue_id`)
+    REFERENCES `item_field_catalogue` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE booleans ADD CONSTRAINT `items_ booleans_fk` FOREIGN KEY `items_ booleans_fk` (`item_field_catalogue_id`)
+    REFERENCES `item_field_catalogue` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE components_data_templates_catalogue ADD CONSTRAINT `data_templates_component_templates_catalogue_fk` FOREIGN KEY `data_templates_component_templates_catalogue_fk` (`data_template_guid`)
+    REFERENCES `data_templates` (`guid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+ALTER TABLE components_data_templates_catalogue ADD CONSTRAINT `component_types_component_templates_catalogue_fk` FOREIGN KEY `component_types_component_templates_catalogue_fk` (`component_type_id`)
+    REFERENCES `component_types` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE;
+
+ALTER TABLE insert_composition_catalogue ADD CONSTRAINT `insert_composition_catalogue_layout_template_variable_fk` FOREIGN KEY `insert_composition_catalogue_layout_template_variable_fk` (`layout_template_variable_variable`)
+    REFERENCES `layout_template_variables` (`variable`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE;
+
+ALTER TABLE layout_template_variables ADD CONSTRAINT `layout_templates_layout_variables_fk` FOREIGN KEY `layout_templates_layout_variables_fk` (`layout_template_id`)
+    REFERENCES `layout_templates` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
+
+
+
+
+# INSERT SETUP DATA
+
+# DEFAULT FIELD TYPES
+INSERT INTO field_types SET label="String", validation_definition="String";
+INSERT INTO field_types SET label="Integer", validation_definition="Integer";
+
+# DEFAULT LAYOUT TEMPLATES
+INSERT INTO layout_templates SET label="Standard XHTML 1.0 Layout", directory="MasterLayouts/Test_Master_Page.html";
+INSERT INTO layout_templates SET label="New Component", directory="Components/Create_New_Component.html";
+INSERT INTO layout_templates SET label="Select Box", directory="Components/Select_Field.html";
+INSERT INTO layout_templates SET label="Select Box Option", directory="Components/Select_Field_Option.html";
+
+# DEFAULT LAYOUT TYPES
+INSERT INTO layout_types SET label="Standard XHTML";
+INSERT INTO layout_types SET label="Standard RSS";
+
+
+
